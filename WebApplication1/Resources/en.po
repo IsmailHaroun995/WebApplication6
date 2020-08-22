@@ -1,0 +1,4 @@
+﻿msgid"Hello World!"
+mgster"Hello world we use Muliti"
+msgid"Hello"
+msgstr"Hello"

@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Http.Features
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.Extensions.Options
+
+@inject IViewLocalizer Localizer 
+@inject IOptions<RequestLocalizationOptions> LocOptions
+
+@{ 
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var cultureItems = LocOptions.Value.SupportedCultures.Select(c => new SelectListItem { Value = c.Name, Text = c.DisplayName }).ToList();
+
+    var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
+
+}
+<form  id="selectLanguage" asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" role="form" method="post">
+
+    @if (requestCulture != null) 
+    { 
+    <input type="hidden"  name="currentCulture" value="@requestCulture.RequestCulture.UICulture.Name" />
+    
+    }
+<label asp-for="@requestCulture.RequestCulture.UICulture.Name"> <i class="fa fa-language"></i> </label>
+<select name="culture" onchange="this.form.submit();" asp-for="@requestCulture.RequestCulture.UICulture.Name">
+   
+</select>
+
+</form> 

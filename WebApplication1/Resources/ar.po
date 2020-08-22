@@ -1,0 +1,4 @@
+﻿msgid"الاسم الاول!"
+mgster"Hello world we use Muliti"
+msgid"مرحبا"
+msgstr"Hello"
